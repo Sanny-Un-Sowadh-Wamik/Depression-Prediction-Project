@@ -19,11 +19,21 @@ The dataset used in this project contains:
 
 ## Repository Contents
 
-- `depression-notebook-generator.py` - Script that generates the complete Jupyter notebook
 - `Depression_Prediction_Project.ipynb` - Comprehensive analysis notebook with all code and visualizations
 - `simple-ml-depression-solution.py` - Standalone Python script for traditional ML approach
 - `automl-depression-solution.py` - Implementation using AutoML frameworks
 - `README.md` - Project documentation (this file)
+
+## Jupyter Notebook Contents
+
+The `Depression_Prediction_Project.ipynb` notebook contains a complete walkthrough of the project including:
+
+1. **Data Exploration** - Visualization of feature distributions and relationships with depression
+2. **Data Preprocessing** - Cleaning and handling inconsistencies in the dataset
+3. **Feature Engineering** - Creation of new features to improve model performance
+4. **Model Development** - Implementation of multiple machine learning algorithms
+5. **Feature Importance Analysis** - Visualization of the most important predictors
+6. **Predictions** - Generation of depression predictions and submission file
 
 ## Installation
 
@@ -52,12 +62,12 @@ The dataset used in this project contains:
 
 ## Usage
 
-### Running the Notebook Generator
+### Running the Jupyter Notebook
 
 ```bash
-python depression-notebook-generator.py
+jupyter notebook Depression_Prediction_Project.ipynb
 ```
-This will create a Jupyter notebook (`Depression_Prediction_Project.ipynb`) with the complete analysis.
+This will open the complete analysis notebook where you can run the cells interactively.
 
 ### Running the Traditional ML Solution
 
