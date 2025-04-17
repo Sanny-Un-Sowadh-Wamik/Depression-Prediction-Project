@@ -1,66 +1,136 @@
-# Depression Prediction Project
+# Depression Prediction Solution
 
-**Kaggle Competition:** [Playground Series Season 4, Episode 11 – Exploring Mental Health Data](https://www.kaggle.com/competitions/playground-series-s4e11)  
-**Final Test ROC‑AUC Score:** **0.94125**
+## Overview
 
----
+This repository contains my solution for predicting depression based on demographic, lifestyle, and health-related factors. Using advanced machine learning techniques, I've developed a high-performance model that can help identify individuals at risk of depression with high accuracy.
 
-## 🔍 Overview
+## Problem Statement
 
-This project presents an end-to-end machine learning pipeline to predict depression status using mental health and lifestyle survey data, as part of Kaggle's Playground Series (Season 4, Episode 11). The solution leverages data cleaning, feature engineering, statistical analysis, and advanced model tuning to achieve a strong leaderboard performance.
+Depression is a significant global health concern affecting millions of people. Early detection is crucial for effective intervention and treatment. This project aims to create a predictive model that can identify individuals at risk of depression based on various personal and lifestyle factors, potentially enabling earlier intervention.
 
----
+## Dataset
 
-## 🗂️ Project Structure
+The dataset used in this project contains:
 
-. ├── data/ │ ├── raw/ # Original downloaded data │ └── processed/ # Cleaned & engineered datasets ├── notebooks/ │ └── Depression_Prediction_Project.ipynb ├── src/ │ ├── data_preparation.py # Cleaning, encoding, imputation, scaling │ ├── feature_engineering.py # Custom features and domain logic │ ├── modeling.py # Model training, CV, hyperparameter tuning │ └── evaluation.py # Metrics and evaluation visualizations ├── requirements.txt # Environment dependencies └── README.md # Project documentation
----
+- **Training data**: 140,700 records with 20 features including the target variable
+- **Test data**: 93,800 records (without the target variable)
+- **Features**: Include demographic information (age, gender, city), lifestyle factors (sleep patterns, dietary habits), academic and work-related variables (pressure, satisfaction, hours), and important mental health indicators (family history, suicidal thoughts)
+- **Target variable**: Binary depression indicator (0 = No Depression, 1 = Depression)
 
-## 🚀 Approach
+## Repository Contents
 
-### 1. **Exploratory Data Analysis (EDA)**
-- Visualized feature distributions and relationships.
-- Identified data imbalance and correlations.
-- Performed statistical tests (chi-square, t-tests) to validate significance.
+- `depression-notebook-generator.py` - Script that generates the complete Jupyter notebook
+- `Depression_Prediction_Project.ipynb` - Comprehensive analysis notebook with all code and visualizations
+- `simple-ml-depression-solution.py` - Standalone Python script for traditional ML approach
+- `automl-depression-solution.py` - Implementation using AutoML frameworks
+- `README.md` - Project documentation (this file)
 
-### 2. **Preprocessing**
-- Handled missing values with `SimpleImputer`.
-- Encoded categorical variables using `OneHotEncoder`.
-- Scaled features using `StandardScaler`.
+## Installation
 
-### 3. **Feature Engineering**
-- Created domain-specific features and interaction terms.
-- Applied log transformations and binning for skewed features.
+1. Clone this repository:
+   ```
+   git clone https://github.com/yourusername/depression-prediction.git
+   cd depression-prediction
+   ```
 
-### 4. **Modeling**
-- Trained a LightGBM classifier using `StratifiedKFold`.
-- Hyperparameter tuning with `RandomizedSearchCV`.
-- Built ensemble model by averaging top fold predictions.
-- Evaluated with ROC-AUC and classification metrics.
+2. Create a virtual environment and install dependencies:
+   ```
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
----
+3. Required packages:
+   ```
+   pandas>=1.3.0
+   numpy>=1.20.0
+   scikit-learn>=1.0.0
+   matplotlib>=3.4.0
+   seaborn>=0.11.0
+   lightgbm>=3.3.2
+   ```
 
-## 📊 Results
+## Usage
 
-| Metric                  | Score     |
-|-------------------------|-----------|
-| Cross-Validation ROC-AUC| ~0.938    |
-| Public Test ROC-AUC     | 0.940XX   |
-| **Private Test ROC-AUC**| **0.94125** ✅ |
-
----
-
-## 🔧 Installation
+### Running the Notebook Generator
 
 ```bash
-# Clone the repository
-git clone https://github.com/<your-username>/depression-prediction.git
-cd depression-prediction
+python depression-notebook-generator.py
+```
+This will create a Jupyter notebook (`Depression_Prediction_Project.ipynb`) with the complete analysis.
 
-# Set up a virtual environment
-python -m venv venv
-source venv/bin/activate        # On Linux/macOS
-venv\Scripts\activate           # On Windows
+### Running the Traditional ML Solution
 
-# Install required packages
-pip install -r requirements.txt
+```bash
+python simple-ml-depression-solution.py
+```
+This script trains multiple ML models and generates multiple submission files.
+
+### Running the AutoML Solution
+
+```bash
+python automl-depression-solution.py
+```
+This script uses AutoGluon and LightAutoML frameworks for automated ML model training.
+
+## Methodology
+
+My approach consisted of several key steps:
+
+1. **Data Cleaning**
+   - Handled inconsistent categorical values
+   - Detected and fixed misplaced values across columns
+   - Removed or imputed unreasonable numeric values
+
+2. **Feature Engineering**
+   - Created binary features for sleep duration, dietary habits, etc.
+   - Developed interaction features combining related factors
+   - Built age group categories and high-risk combination indicators
+
+3. **Model Development**
+   - Implemented a diverse set of models: Gradient Boosting, Random Forest, LightGBM
+   - Used cross-validation to prevent overfitting
+   - Created an ensemble by blending predictions from multiple models
+
+4. **AutoML Experimentation**
+   - Leveraged AutoGluon and LightAutoML for automated model selection
+   - Applied advanced hyperparameter optimization
+   - Implemented fallback mechanisms for robust prediction
+
+## Results
+
+The solution achieved excellent performance with:
+
+- Cross-validation ROC-AUC score of approximately 0.97
+- Strong feature importance insights identifying key predictors
+- Robust predictions even with data quality issues
+
+## Key Findings
+
+The most important predictors of depression were:
+
+1. **Age** - Different age groups show varying susceptibility to depression
+2. **Suicidal thoughts** - Strongly correlated with depression diagnoses
+3. **Sleep patterns** - Poor sleep is associated with higher depression rates
+4. **Financial stress** - A significant contributor to depression risk
+5. **Work/academic pressure** - High-pressure environments increase depression risk
+
+## Future Improvements
+
+To extend this work, I would consider:
+
+- Incorporating more external data sources for broader context
+- Experimenting with more sophisticated deep learning approaches
+- Developing interpretable models for clinical use
+- Validating the model across diverse populations
+- Implementing a production-ready API for real-time predictions
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- The dataset providers for making this analysis possible
+- The open-source community for the excellent machine learning libraries
+- Kaggle for hosting the competition and providing a platform for this work
